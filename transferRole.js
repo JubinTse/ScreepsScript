@@ -8,11 +8,7 @@ module.exports = {
          * resourceStorages 存放资源的仓库
          * ruins            身上有资源的尸体
          */
-        var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
-            filter: (resource) => {
-                return resource.energy > 300
-            }
-        });
+        var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
         var ruins = creep.pos.findClosestByRange(FIND_RUINS, {
             filter: (ruin) => {
                 ruin.store[RESOURCE_ENERGY] > 0

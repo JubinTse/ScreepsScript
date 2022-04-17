@@ -8,10 +8,14 @@ module.exports = {
          * resourceStorages 存放资源的仓库
          * ruins            身上有资源的尸体
          */
-        var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+        var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+            filter: (resource) => {
+                return resource.energy > 300;
+            }
+        });
         var ruins = creep.pos.findClosestByRange(FIND_RUINS, {
             filter: (ruin) => {
-                ruin.store[RESOURCE_ENERGY] > 0
+                return ruin.store.energy != 0;
             }
         });
         var outStorages = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -54,17 +58,17 @@ module.exports = {
          * 不同角色的工作分配
          */
         if (creep.memory.role == "outTransfer") {
-            if (resources) {
-                if (creep.pickup(resources) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(resources);
-                    creep.say("👷‍♀️揀貨");
-                }
-            } else if (ruins) {
+            if (ruins) {
                 if (creep.withdraw(ruins, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(ruins);
                     creep.say("👷‍♀️揀尸");
                 }
-            } else if (outStorages) {
+            } else if (resources) {
+                if (creep.pickup(resources) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(resources);
+                    creep.say("👷‍♀️揀貨");
+                }
+            } else  if (outStorages) {
                 if (creep.withdraw(outStorages, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(outStorages);
                     creep.say("👷‍♀️拿貨");

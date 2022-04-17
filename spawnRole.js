@@ -22,7 +22,9 @@ module.exports = {
 
         for (var name in Game.creeps) {
             var creep = Game.creeps[name];
-            ticksToLiveAverage += creep.ticksToLive;
+            if (!creep.spawning) {
+                ticksToLiveAverage += creep.ticksToLive;
+            }
         }
         console.log('全员平均寿命：' + parseFloat(ticksToLiveAverage / total));
         console.log('临时工：' + (temporaryHarvesters1.length + temporaryHarvesters2.length + temporaryWorkers.length) + '人');

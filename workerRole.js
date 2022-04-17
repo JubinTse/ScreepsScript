@@ -8,6 +8,11 @@ module.exports = {
          * needToRepairs    需要维修的建筑（生命值已老化或被攻击至一半以下）
          * storages         存放资源的仓库
          */
+        var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
+            filter: (resource) => {
+                resource.energy < 300;
+            }
+        })
         var targets = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
         var storages = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
@@ -38,8 +43,12 @@ module.exports = {
                     creep.moveTo(storages);
                     creep.say('👷‍♀️拿貨');
                 }
+            } else if (resources) {
+                if (creep.pickup(resources) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(resources);
+                }
             }
-            
+
         } else if (creep.memory.role == 'builder') {
             if (creep.build(targets) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets);

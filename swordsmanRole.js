@@ -8,6 +8,9 @@
             if (creep.attack(enemys) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(enemys);
             }
+        } else {
+            creep.moveTo(Game.flags['sordsmen drill ground']);
+            creep.say('集合')
         }
     }
 }

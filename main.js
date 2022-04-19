@@ -53,9 +53,9 @@ module.exports.loop = function () {
                     ) < 3) {
                         var newName = 'worker' + Game.time;
                         Game.spawns['Spawn1'].spawnCreep([
-                            WORK, WORK, WORK, WORK, WORK, WORK,
-                            CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
-                            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+                            WORK, WORK, WORK,
+                            CARRY, CARRY, CARRY,
+                            MOVE, MOVE, MOVE
                         ], newName, { memory: { role: 'worker' } });
                     }
                     break;
@@ -66,9 +66,8 @@ module.exports.loop = function () {
                     ) < 5) {
                         var newName = 'transfer' + Game.time;
                         Game.spawns['Spawn1'].spawnCreep([
-                            WORK, WORK, WORK,
-                            CARRY, CARRY, CARRY,
-                            MOVE, MOVE, MOVE
+                            CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
                         ], newName, { memory: { role: 'outTransfer' } });
                     }
                     break;

@@ -10,7 +10,7 @@ module.exports = {
          */
         var resources = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES, {
             filter: (resource) => {
-                resource.energy < 300;
+                return resource.energy < 300;
             }
         })
         var targets = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
@@ -46,6 +46,7 @@ module.exports = {
             } else if (resources) {
                 if (creep.pickup(resources) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(resources);
+                    creep.say("👷‍♀️揀貨");
                 }
             }
 

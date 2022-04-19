@@ -7,7 +7,7 @@ const swordsmanRole = require('swordsmanRole');
 const towerRole = require('./towerRole');
 
 module.exports.loop = function () {
-
+    
     console.log('----------------------------');
 
     // 释放内存
@@ -50,9 +50,13 @@ module.exports.loop = function () {
                         _.filter(Game.creeps, (creep) => creep.memory.role == 'builder').length +
                         _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader').length +
                         _.filter(Game.creeps, (creep) => creep.memory.role == 'repairman').length
-                    ) < 7) {
+                    ) < 3) {
                         var newName = 'worker' + Game.time;
-                        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE], newName, { memory: { role: 'worker' } });
+                        Game.spawns['Spawn1'].spawnCreep([
+                            WORK, WORK, WORK, WORK, WORK, WORK,
+                            CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                            MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+                        ], newName, { memory: { role: 'worker' } });
                     }
                     break;
                 case 'inTransfer':
@@ -61,13 +65,21 @@ module.exports.loop = function () {
                         _.filter(Game.creeps, (creep) => creep.memory.role == 'outTransfer').length
                     ) < 5) {
                         var newName = 'transfer' + Game.time;
-                        Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], newName, { memory: { role: 'outTransfer' } });
+                        Game.spawns['Spawn1'].spawnCreep([
+                            WORK, WORK, WORK,
+                            CARRY, CARRY, CARRY,
+                            MOVE, MOVE, MOVE
+                        ], newName, { memory: { role: 'outTransfer' } });
                     }
                     break;
                 case 'swordsman':
-                    if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'swordsman').length) < 4) {
+                    if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'swordsman').length) < 2) {
                         var newName = 'swordsman' + Game.time;
-                        Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE], newName, { memory: { role: 'swordsman' } });
+                        Game.spawns['Spawn1'].spawnCreep([
+                            TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+                            ATTACK, ATTACK, ATTACK,
+                            MOVE, MOVE, MOVE
+                        ], newName, { memory: { role: 'swordsman' } });
                     }
                     break;
                 default:

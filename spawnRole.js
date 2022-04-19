@@ -59,17 +59,28 @@ module.exports = {
 
         if ((outTransfer.length + inTransfer.length) < 4) {
             var newName = 'transfer' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE], newName, { memory: { role: 'outTransfer' } });
+            Game.spawns['Spawn1'].spawnCreep([
+                CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,
+                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE
+            ], newName, { memory: { role: 'outTransfer' } });
         }
 
-        if ((workers.length + builders.length + upgraders.length + repairmen.length) < 6) {
+        if ((workers.length + builders.length + upgraders.length + repairmen.length) < 2) {
             var newName = 'worker' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE], newName, { memory: { role: 'worker' } });
+            Game.spawns['Spawn1'].spawnCreep([
+                WORK, WORK, WORK,
+                CARRY, CARRY, CARRY,
+                MOVE, MOVE, MOVE
+            ], newName, { memory: { role: 'worker' } });
         }
 
-        if (swordsmen.length < 3) {
+        if (swordsmen.length < 1) {
             var newName = 'swordsman' + Game.time;
-            Game.spawns['Spawn1'].spawnCreep([TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, ATTACK, ATTACK, ATTACK, ATTACK, MOVE, MOVE, MOVE], newName, { memory: { role: 'swordsman' } });
+            Game.spawns['Spawn1'].spawnCreep([
+                TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH,
+                ATTACK, ATTACK, ATTACK, 
+                MOVE, MOVE, MOVE
+            ], newName, { memory: { role: 'swordsman' } });
         }
     }
 }

@@ -21,7 +21,8 @@ module.exports = {
         var outStorages = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (
-                    structure.structureType == STRUCTURE_CONTAINER &&
+                    (structure.structureType == STRUCTURE_CONTAINER ||
+                        structure.structureType == STRUCTURE_STORAGE) &&
                     structure.store[RESOURCE_ENERGY] != 0
                 );
             },
@@ -39,7 +40,8 @@ module.exports = {
         var resourceStorages = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (
-                    structure.structureType == STRUCTURE_CONTAINER &&
+                    (structure.structureType == STRUCTURE_CONTAINER ||
+                        structure.structureType == STRUCTURE_STORAGE) &&
                     structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
                 );
             },
@@ -68,7 +70,7 @@ module.exports = {
                     creep.moveTo(resources);
                     creep.say("👷‍♀️揀貨");
                 }
-            } else  if (outStorages) {
+            } else if (outStorages) {
                 if (creep.withdraw(outStorages, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(outStorages);
                     creep.say("👷‍♀️拿貨");
